@@ -71,7 +71,6 @@ export default function Footer() {
             {/* Copyright */}
             <div className="max-w-7xl mx-auto pt-6 flex flex-col sm:flex-row justify-between items-center text-xs text-gray-500 gap-2">
                 <p>&copy; {new Date().getFullYear()} TuPintor. Todos los derechos reservados.</p>
-                <p>Diseño y Desarrollo Web</p>
             </div>
         </footer>
     );

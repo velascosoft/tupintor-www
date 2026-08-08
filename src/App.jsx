@@ -11,6 +11,7 @@ import WhatsAppButton from './components/WhatsAppButton';
 
 // Nueva vista
 import GalleryPage from './pages/GalleryPage';
+import LocationMap from './components/LocationMap';
 
 function LandingPage() {
   return (
@@ -22,6 +23,7 @@ function LandingPage() {
         <Gallery />
         <WhyUs />
         <QuoteProcess />
+        <LocationMap/>
         <MoreWorks />
       </main>
       <Footer />
