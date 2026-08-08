@@ -1,7 +1,7 @@
 import logo from '../assets/logo-tupintor.png';
 
 export default function Footer() {
-    const phone = "3804750587";
+    const phone = "+54 9 3518500253";
 
     return (
         <footer id="contacto" className="bg-brand-dark text-gray-300 pt-12 pb-8 px-4 border-t border-gray-800">
@@ -48,7 +48,7 @@ export default function Footer() {
         </li>
         <li className="flex items-center gap-2.5">
             <i className="fa-solid fa-location-dot text-brand-blue text-base"></i>
-            <span>Zona Córdoba: Capital y Alrededores</span>
+            <span>Zona Córdoba: Pje. Antonio de la Parra 52</span>
         </li>
         {/* Nuevo ícono de Instagram */}
         <li className="flex items-center gap-2.5 pt-1">

@@ -5,7 +5,7 @@ import logo from '../assets/logo-tupintor.png';
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
     const location = useLocation();
-    const phone = "3804750587";
+    const phone = "+5493518500253";
 
     const whatsappUrl = `https://wa.me/${phone}?text=Hola,%20quisiera%20pedir%20un%20presupuesto`;
 

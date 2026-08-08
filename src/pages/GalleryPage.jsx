@@ -16,6 +16,9 @@ import img11 from '../assets/images/techo.jpg';
 import img12 from '../assets/images/exteriorBlanco.jpg';
 import img13 from '../assets/images/FrenteDeCasa.jpg';
 import img14 from '../assets/images/TechoBlanco.jpg';
+import img15 from '../assets/images/interiorPasillo.jpg';
+import img16 from '../assets/images/exteriorPatio.jpg';
+
 
 export default function GalleryPage() {
     const [filter, setFilter] = useState('Todos');
@@ -36,6 +39,10 @@ export default function GalleryPage() {
         { src: img12, title: "Pintura Exterior Completa", category: "Exterior" },
         { src: img13, title: "Frente de Casa Residencial", category: "Exterior" },
         { src: img14, title: "Techo Blanco Impermeabilizado", category: "Exterior" },
+        { src: img15, title: "Interior pasillo", category: "Interior" },
+        { src: img16, title: "Interior pasillo", category: "Exterior" },
+
+
     ];
 
     const categorias = ['Todos', 'Interior', 'Exterior', 'Pisos', 'Airless'];

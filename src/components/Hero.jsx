@@ -1,7 +1,7 @@
 import fondoHero from '../assets/images/estructuraExterior.jpg';
 
 export default function Hero() {
-    const phone = "3804750587";
+    const phone = "+5493518500253";
     const whatsappUrl = `https://wa.me/${phone}?text=Hola,%20quisiera%20enviar%20fotos%20para%20un%20presupuesto`;
 
     const serviciosClave = [

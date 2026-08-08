@@ -1,5 +1,5 @@
 export default function Services() {
-    const phone = "5493804750587";
+    const phone = "+5493518500253";
 
     const servicios = [
         {

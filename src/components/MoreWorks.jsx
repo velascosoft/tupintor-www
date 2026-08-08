@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import img5 from '../assets/images/interior.jpg';
 import img6 from '../assets/images/techo.jpg';
-import img7 from '../assets/images/estructuraExterior.jpg';
+import img7 from '../assets/images/interiorPasillo.jpg';
 import img8 from '../assets/images/FrenteDeCasa.jpg';
 
 export default function MoreWorks() {
@@ -12,7 +12,7 @@ export default function MoreWorks() {
     const fotosExtra = [
         { src: img5, alt: "Proyecto de pintura interior" },
         { src: img6, alt: "Terminación piso terraza" },
-        { src: img7, alt: "Trabajo en exterior" },
+        {src: img7, alt: "Terminación piso terraza" },
         { src: img8, alt: "Frente de una casa" },
     ];
 

@@ -64,7 +64,6 @@ export default function Gallery() {
                 </div>
 
             </div>
-
             {/* Modal Lightbox para ver la foto ampliada */}
             {selectedImage && (
                 <div
