@@ -1,7 +1,7 @@
 import logo from '../assets/logo-tupintor.png';
 
 export default function Footer() {
-    const phone = "+54 9 3518500253";
+    const phone = "+5493518500253";
 
     return (
         <footer id="contacto" className="bg-brand-dark text-gray-300 pt-12 pb-8 px-4 border-t border-gray-800">
