@@ -1,0 +1,31 @@
+services:
+  tupintor-www:
+    image: ghcr.io/velascosoft/tupintor-www:latest
+    container_name: tupintor-www
+    expose:
+      - 3000
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+      - LOG_LEVEL=debug
+    volumes:
+      - /var/lib/production/apps/tupintor-www:/app/resources:ro
+    networks:
+      - traefik-frontends-proxy
+      - internal-network
+    labels:
+      - traefik.enable=true
+      - traefik.docker.network=traefik-frontends-proxy
+      - traefik.http.routers.tupintor-www.rule=Host(`tupintorcba.com.ar`) || Host(`www.tupintorcba.com.ar`)
+      - traefik.http.services.tupintor-www.loadbalancer.server.port=3000
+
+    #logging:
+    #  driver: loki
+    #  options:
+    #    loki-url: http://127.0.0.1:3100/loki/api/v1/push
+
+networks:
+  traefik-frontends-proxy:
+    external: true
+  internal-network:
+    external: true
