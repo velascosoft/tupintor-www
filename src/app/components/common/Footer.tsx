@@ -4,7 +4,7 @@ const Footer = () => {
     return (
         <footer
             id="contacto"
-            className="bg-brand-dark text-gray-300 pt-12 pb-8 px-4 border-t border-gray-800"
+            className="bg-[#0f172a] text-gray-300 pt-12 pb-8 px-4 border-t border-gray-800"
         >
             <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 pb-10 border-b border-gray-800/80">
                 {/* Columna 1: Marca y descripción */}
@@ -26,14 +26,14 @@ const Footer = () => {
                     </p>
                 </div>
 
-                {/* Columna 2: Enlaces Rápidos (con /# para prevenir errores en /galeria) */}
+                {/* Columna 2: Enlaces Rápidos */}
                 <div>
                     <h4 className="text-white font-bold text-base mb-3">Navegación</h4>
                     <ul className="space-y-2 text-xs md:text-sm text-gray-400 font-medium">
                         <li>
                             <a
                                 href="/#servicios"
-                                className="hover:text-brand-blue transition-colors"
+                                className="hover:text-blue-400 transition-colors"
                             >
                                 Nuestros Servicios
                             </a>
@@ -41,7 +41,7 @@ const Footer = () => {
                         <li>
                             <a
                                 href="/#trabajos"
-                                className="hover:text-brand-blue transition-colors"
+                                className="hover:text-blue-400 transition-colors"
                             >
                                 Galería de Trabajos
                             </a>
@@ -49,7 +49,7 @@ const Footer = () => {
                         <li>
                             <a
                                 href="/#por-que-elegirnos"
-                                className="hover:text-brand-blue transition-colors"
+                                className="hover:text-blue-400 transition-colors"
                             >
                                 ¿Por qué elegirnos?
                             </a>
@@ -59,7 +59,7 @@ const Footer = () => {
                                 href={`https://wa.me/${phone}?text=Hola,%20quisiera%20pedir%20un%20presupuesto`}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="hover:text-brand-blue transition-colors"
+                                className="hover:text-blue-400 transition-colors"
                             >
                                 Pedir Presupuesto
                             </a>
@@ -81,10 +81,9 @@ const Footer = () => {
                             </span>
                         </li>
                         <li className="flex items-center gap-2.5">
-                            <i className="fa-solid fa-location-dot text-brand-blue text-base"></i>
+                            <i className="fa-solid fa-location-dot text-blue-400 text-base"></i>
                             <span>Zona Córdoba: Pje. Antonio de la Parra 52</span>
                         </li>
-                        {/* Nuevo ícono de Instagram */}
                         <li className="flex items-center gap-2.5 pt-1">
                             <i className="fa-brands fa-instagram text-pink-500 text-base"></i>
                             <a
