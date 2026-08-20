@@ -1,6 +1,6 @@
 'use client'
 
-import Hero from "@/app/components/Hero";
+import Hero from "@/app/components/Hero"
 import Services from "@/app/components/Services";
 import Gallery from "@/app/components/Gallery";
 import WhyUs from "@/app/components/WhyUs";

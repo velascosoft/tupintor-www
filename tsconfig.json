@@ -33,6 +33,9 @@
             "@/app/*": [
                 "app/*"
             ],
+            "@/components/*": [
+                "components/*"
+            ],
             "@/lib/*": [
                 "lib/*"
             ]
