@@ -8,7 +8,7 @@ interface GalleryItem {
     title: string;
     category: string;
     imageUrl: string;
-    isFeatured: boolean; // <-- Nuevo campo
+    isFeatured: boolean;
 }
 
 const STORAGE_KEY = 'tupintor_gallery_items';

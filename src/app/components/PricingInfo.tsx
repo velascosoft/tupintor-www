@@ -42,7 +42,7 @@ const PricingInfo = () => {
                             href={`https://wa.me/${phone}?text=Hola,%20quisiera%20consultar%20un%20presupuesto%20por%20m2`}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center gap-2 bg-brand-dark hover:bg-slate-800 text-white font-semibold px-5 py-2.5 rounded-full shadow-xs transition-all duration-200 text-xs sm:text-sm"
+                            className="inline-flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white font-semibold px-5 py-2.5 rounded-full shadow-xs transition-all duration-200 text-xs sm:text-sm"
                         >
                             <i className="fa-brands fa-whatsapp text-green-400 text-base"></i>
                             <span>Consultar presupuesto por m²</span>
