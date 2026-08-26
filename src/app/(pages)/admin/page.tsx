@@ -95,13 +95,20 @@ const AdminDashboard = () => {
                     </button>
                 </div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
-                    <GalleryForm onSubmit={handleAdd} />
-                    <GalleryList
-                        items={items}
-                        onDelete={handleDelete}
-                        onToggleFeatured={handleToggleFeatured}
-                    />
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                    {/* Formulario toma 5 columnas de 12 */}
+                    <div className="lg:col-span-5">
+                        <GalleryForm onSubmit={handleAdd} />
+                    </div>
+
+                    {/* Lista toma 7 columnas de 12 */}
+                    <div className="lg:col-span-7">
+                        <GalleryList
+                            items={items}
+                            onDelete={handleDelete}
+                            onToggleFeatured={handleToggleFeatured}
+                        />
+                    </div>
                 </div>
             </div>
         </div>
