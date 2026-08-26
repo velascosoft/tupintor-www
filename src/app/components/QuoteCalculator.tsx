@@ -5,7 +5,6 @@ import { useState } from 'react';
 type ServiceType = 'paredes' | 'cielorrasos' | 'puertas' | 'ventanas';
 type RoomType = 'living' | 'habitacion' | 'banio' | 'cocina' | 'fachada' | 'patio';
 type WallLocation = 'interior' | 'exterior';
-type PaintType = 'mate' | 'satinado';
 
 const PHONE_NUMBER = '+5493518500253';
 
@@ -23,7 +22,6 @@ export default function QuoteCalculator() {
     const [width, setWidth] = useState<number | ''>('');
     const [length, setLength] = useState<number | ''>('');
     const [quantity, setQuantity] = useState<number | ''>(1);
-    const [paint, setPaint] = useState<PaintType>('mate');
     const [estimatedTotal, setEstimatedTotal] = useState<number | null>(null);
 
     const calculateEstimate = (e: React.FormEvent) => {
@@ -45,14 +43,9 @@ export default function QuoteCalculator() {
             total = qty * PRICE_PER_WINDOW;
         }
 
-        if ((service === 'paredes' || service === 'cielorrasos') && paint === 'satinado') {
-            total *= 1.15;
-        }
-
         setEstimatedTotal(Math.round(total));
     };
 
-    // Mensaje dinámico para WhatsApp
     const getWhatsAppLink = () => {
         let detail = '';
         if (service === 'paredes') {
@@ -68,18 +61,18 @@ export default function QuoteCalculator() {
     };
 
     return (
-        <div className="w-full p-6 bg-white rounded-2xl border border-gray-200 shadow-xs">
-            <h3 className="text-xl font-bold text-slate-900 text-center mb-1">
+        <div className="w-full p-6 bg-white rounded-2xl border border-gray-200/80 shadow-xs">
+            <h3 className="text-xl font-bold text-brand-dark text-center mb-1">
                 Calculá en forma online tu presupuesto
             </h3>
-            <p className="text-slate-500 text-xs text-center mb-6">
+            <p className="text-gray-500 text-xs text-center mb-6">
                 Indicá las medidas o cantidades para obtener una estimación aproximada.
             </p>
 
             <form onSubmit={calculateEstimate} className="space-y-5">
                 {/* Paso 1: Tipo de Servicio */}
                 <div>
-                    <label className="block text-xs font-semibold text-slate-700 text-center mb-2.5">
+                    <label className="block text-xs font-semibold text-gray-700 text-center mb-2.5">
                         ¿Qué necesita pintar?
                     </label>
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
@@ -97,8 +90,8 @@ export default function QuoteCalculator() {
                                     setEstimatedTotal(null);
                                 }}
                                 className={`p-3 rounded-xl border flex flex-col items-center gap-1.5 cursor-pointer transition-all ${service === item.id
-                                        ? 'border-blue-600 bg-blue-50 text-blue-700 font-bold shadow-xs'
-                                        : 'border-gray-200 hover:border-gray-300 text-slate-600'
+                                    ? 'border-brand-blue bg-blue-50 text-brand-blue font-bold shadow-xs'
+                                    : 'border-gray-200 hover:border-gray-300 text-gray-600'
                                     }`}
                             >
                                 <span className="text-xl">{item.icon}</span>
@@ -117,8 +110,8 @@ export default function QuoteCalculator() {
                                 type="button"
                                 onClick={() => setLocation('interior')}
                                 className={`px-4 py-1.5 rounded-full text-xs font-semibold cursor-pointer transition-all ${location === 'interior'
-                                        ? 'bg-blue-600 text-white'
-                                        : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                                    ? 'bg-slate-900 text-white'
+                                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                                     }`}
                             >
                                 🏠 Interior
@@ -127,8 +120,8 @@ export default function QuoteCalculator() {
                                 type="button"
                                 onClick={() => setLocation('exterior')}
                                 className={`px-4 py-1.5 rounded-full text-xs font-semibold cursor-pointer transition-all ${location === 'exterior'
-                                        ? 'bg-blue-600 text-white'
-                                        : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                                    ? 'bg-slate-900 text-white'
+                                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                                     }`}
                             >
                                 🌿 Exterior / Fachada
@@ -154,8 +147,8 @@ export default function QuoteCalculator() {
                                     type="button"
                                     onClick={() => setRoom(item.id as RoomType)}
                                     className={`p-2 rounded-lg border text-xs font-medium cursor-pointer transition-all ${room === item.id
-                                            ? 'border-slate-800 bg-slate-900 text-white font-semibold'
-                                            : 'border-gray-200 text-slate-600 hover:bg-slate-50'
+                                        ? 'border-slate-800 bg-slate-900 text-white font-semibold'
+                                        : 'border-gray-200 text-gray-600 hover:bg-slate-50'
                                         }`}
                                 >
                                     {item.label}
@@ -166,7 +159,7 @@ export default function QuoteCalculator() {
                         {/* Medidas */}
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                             <div>
-                                <label className="block text-xs font-medium text-slate-600 mb-1">
+                                <label className="block text-xs font-medium text-gray-600 mb-1">
                                     Ancho (m)
                                 </label>
                                 <input
@@ -177,11 +170,11 @@ export default function QuoteCalculator() {
                                     placeholder="Ej: 4.0"
                                     value={width}
                                     onChange={(e) => setWidth(e.target.value ? Number(e.target.value) : '')}
-                                    className="w-full p-2 border border-gray-300 rounded-lg text-xs outline-none focus:ring-2 focus:ring-blue-500"
+                                    className="w-full p-2 border border-gray-200 rounded-lg text-xs outline-none focus:border-brand-blue"
                                 />
                             </div>
                             <div>
-                                <label className="block text-xs font-medium text-slate-600 mb-1">
+                                <label className="block text-xs font-medium text-gray-600 mb-1">
                                     Largo (m)
                                 </label>
                                 <input
@@ -192,7 +185,7 @@ export default function QuoteCalculator() {
                                     placeholder="Ej: 3.5"
                                     value={length}
                                     onChange={(e) => setLength(e.target.value ? Number(e.target.value) : '')}
-                                    className="w-full p-2 border border-gray-300 rounded-lg text-xs outline-none focus:ring-2 focus:ring-blue-500"
+                                    className="w-full p-2 border border-gray-200 rounded-lg text-xs outline-none focus:border-brand-blue"
                                 />
                             </div>
                         </div>
@@ -202,7 +195,7 @@ export default function QuoteCalculator() {
                 {service === 'cielorrasos' && (
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-3 border-t border-gray-100">
                         <div>
-                            <label className="block text-xs font-medium text-slate-600 mb-1">Ancho (m)</label>
+                            <label className="block text-xs font-medium text-gray-600 mb-1">Ancho (m)</label>
                             <input
                                 type="number"
                                 step="0.1"
@@ -211,11 +204,11 @@ export default function QuoteCalculator() {
                                 placeholder="Ej: 3.0"
                                 value={width}
                                 onChange={(e) => setWidth(e.target.value ? Number(e.target.value) : '')}
-                                className="w-full p-2 border border-gray-300 rounded-lg text-xs outline-none focus:ring-2 focus:ring-blue-500"
+                                className="w-full p-2 border border-gray-200 rounded-lg text-xs outline-none focus:border-brand-blue"
                             />
                         </div>
                         <div>
-                            <label className="block text-xs font-medium text-slate-600 mb-1">Largo (m)</label>
+                            <label className="block text-xs font-medium text-gray-600 mb-1">Largo (m)</label>
                             <input
                                 type="number"
                                 step="0.1"
@@ -224,7 +217,7 @@ export default function QuoteCalculator() {
                                 placeholder="Ej: 4.0"
                                 value={length}
                                 onChange={(e) => setLength(e.target.value ? Number(e.target.value) : '')}
-                                className="w-full p-2 border border-gray-300 rounded-lg text-xs outline-none focus:ring-2 focus:ring-blue-500"
+                                className="w-full p-2 border border-gray-200 rounded-lg text-xs outline-none focus:border-brand-blue"
                             />
                         </div>
                     </div>
@@ -232,7 +225,7 @@ export default function QuoteCalculator() {
 
                 {(service === 'puertas' || service === 'ventanas') && (
                     <div className="pt-3 border-t border-gray-100">
-                        <label className="block text-xs font-medium text-slate-600 mb-1">
+                        <label className="block text-xs font-medium text-gray-600 mb-1">
                             Cantidad de {service}
                         </label>
                         <input
@@ -242,30 +235,30 @@ export default function QuoteCalculator() {
                             required
                             value={quantity}
                             onChange={(e) => setQuantity(e.target.value ? Number(e.target.value) : '')}
-                            className="w-full p-2 border border-gray-300 rounded-lg text-xs outline-none focus:ring-2 focus:ring-blue-500"
+                            className="w-full p-2 border border-gray-200 rounded-lg text-xs outline-none focus:border-brand-blue"
                         />
                     </div>
                 )}
 
                 <button
                     type="submit"
-                    className="w-full py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl transition-colors cursor-pointer text-xs sm:text-sm shadow-xs"
+                    className="w-full py-2.5 bg-slate-900 hover:bg-slate-800 text-white font-semibold rounded-xl transition-all duration-200 cursor-pointer text-xs sm:text-sm shadow-xs"
                 >
                     Calcular presupuesto
                 </button>
             </form>
 
-            {/* Resultado con botón directo a WhatsApp */}
+            {/* Resultado con estilo unificado */}
             {estimatedTotal !== null && (
-                <div className="mt-5 p-4 bg-emerald-50 border border-emerald-200 rounded-xl text-center space-y-3">
+                <div className="mt-5 p-4 bg-blue-50/60 border border-blue-100 rounded-xl text-center space-y-3">
                     <div>
-                        <p className="text-[10px] text-emerald-700 font-semibold uppercase tracking-wider">
+                        <p className="text-[10px] text-brand-blue font-bold uppercase tracking-wider">
                             Presupuesto Estimado
                         </p>
-                        <p className="text-2xl font-bold text-emerald-900 my-0.5">
+                        <p className="text-2xl font-bold text-brand-dark my-0.5">
                             ${estimatedTotal.toLocaleString('es-AR')} ARS
                         </p>
-                        <p className="text-[11px] text-emerald-600">
+                        <p className="text-[11px] text-gray-500">
                             *Precio sujeto a verificación técnica en obra.
                         </p>
                     </div>
@@ -274,9 +267,9 @@ export default function QuoteCalculator() {
                         href={getWhatsAppLink()}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center justify-center gap-2 w-full py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded-xl transition-colors shadow-xs"
+                        className="inline-flex items-center justify-center gap-2 w-full py-2.5 bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold rounded-xl transition-colors shadow-xs"
                     >
-                        <i className="fa-brands fa-whatsapp text-sm"></i>
+                        <i className="fa-brands fa-whatsapp text-green-400 text-sm"></i>
                         <span>Enviar este presupuesto por WhatsApp</span>
                     </a>
                 </div>
