@@ -1,3 +1,5 @@
+import QuoteCalculator from './QuoteCalculator';
+
 const PricingInfo = () => {
     const phone = "+5493518500253";
 
@@ -50,49 +52,9 @@ const PricingInfo = () => {
                     </div>
 
                     {/* Columna Derecha: Tarjetas contenedoras limpias */}
-                    <div className="lg:col-span-7 space-y-4">
-
-                        {/* Tarjeta 1: Pintura Interior y Exterior */}
-                        <div className="bg-white p-5 md:p-6 rounded-2xl border border-gray-200/80 shadow-xs">
-                            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3 pb-3 border-b border-gray-100">
-                                <h3 className="text-base md:text-lg font-bold text-brand-dark">
-                                    Pintura Interior y Exterior
-                                </h3>
-                                <span className="inline-block bg-blue-50 text-brand-blue font-extrabold text-xs sm:text-sm px-3 py-1 rounded-full border border-blue-100/80">
-                                    Desde $9.000 / m²
-                                </span>
-                            </div>
-
-                            <p className="text-gray-500 text-xs sm:text-sm mb-3 font-medium">
-                                Factores que pueden hacer variar el valor final:
-                            </p>
-
-                            {/* Grilla de factores con tildes */}
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-gray-600">
-                                {factoresVariacion.map((factor, idx) => (
-                                    <div key={idx} className="flex items-center gap-2">
-                                        <span className="text-brand-blue font-bold text-xs">✓</span>
-                                        <span>{factor}</span>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-
-                        {/* Tarjeta 2: Revestimiento Plástico */}
-                        <div className="bg-white p-5 md:p-6 rounded-2xl border border-gray-200/80 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                            <div>
-                                <h3 className="text-base md:text-lg font-bold text-brand-dark mb-1">
-                                    Revestimiento Plástico (Texturado)
-                                </h3>
-                                <p className="text-gray-500 text-xs leading-relaxed max-w-md">
-                                    Aplicación de material tipo Tarquini / Revear con llana o rodillo en exteriores e interiores.
-                                </p>
-                            </div>
-                            <span className="inline-block bg-blue-50 text-brand-blue font-extrabold text-xs sm:text-sm px-3 py-1 rounded-full border border-blue-100/80 whitespace-nowrap self-start sm:self-center">
-                                Desde $21.000 / m²
-                            </span>
-                        </div>
-
+                    {/* Columna Derecha: Calculador Interactivo */}
+                    <div className="lg:col-span-7">
+                        <QuoteCalculator />
                     </div>
 
                 </div>
