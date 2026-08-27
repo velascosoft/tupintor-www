@@ -30,16 +30,18 @@ export default function QuoteCalculator() {
 
     const [prices, setPrices] = useState<CotizadorPrices>(DEFAULT_PRICES);
 
+    const [height, setHeight] = useState<number | ''>(2.5);
+
     useEffect(() => {
-    const stored = localStorage.getItem('cotizador_precios');
-    if (stored) {
-        try {
-            setPrices(JSON.parse(stored));
-        } catch (e) {
-            console.error('Error cargando precios en cotizador', e);
+        const stored = localStorage.getItem('cotizador_precios');
+        if (stored) {
+            try {
+                setPrices(JSON.parse(stored));
+            } catch (e) {
+                console.error('Error cargando precios en cotizador', e);
+            }
         }
-    }
-}, []);
+    }, []);
 
     const calculateEstimate = (e: React.FormEvent) => {
         e.preventDefault();
@@ -49,7 +51,8 @@ export default function QuoteCalculator() {
         const qty = Number(quantity) || 0;
 
         if (service === 'paredes') {
-            const wallArea = 2 * (w + l) * 2.5;
+            const h = Number(height) || 2.5;
+            const wallArea = 2 * (w + l) * h;
             const rate = location === 'exterior' ? prices.exterior : prices.interior;
             total = wallArea * rate;
         } else if (service === 'cielorrasos') {
@@ -66,7 +69,7 @@ export default function QuoteCalculator() {
     const getWhatsAppLink = () => {
         let detail = '';
         if (service === 'paredes') {
-            detail = `Paredes (${location.toUpperCase()}) - ${room} de ${width}x${length}m`;
+            detail = `Paredes (${location.toUpperCase()}) - ${room} de ${width}x${length}m (alt: ${height}m)`;
         } else if (service === 'cielorrasos') {
             detail = `Cielorrasos de ${width}x${length}m`;
         } else {
@@ -174,8 +177,8 @@ export default function QuoteCalculator() {
                             ))}
                         </div>
 
-                        {/* Medidas */}
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        {/* Medidas: Ancho, Largo y Altura */}
+                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                             <div>
                                 <label className="block text-xs font-medium text-gray-600 mb-1">
                                     Ancho (m)
@@ -203,6 +206,22 @@ export default function QuoteCalculator() {
                                     placeholder="Ej: 3.5"
                                     value={length}
                                     onChange={(e) => setLength(e.target.value ? Number(e.target.value) : '')}
+                                    className="w-full p-2 border border-gray-200 rounded-lg text-xs outline-none focus:border-brand-blue"
+                                />
+                            </div>
+                            <div>
+                                <label className="block text-xs font-medium text-gray-600 mb-1">
+                                    Altura techo (m)
+                                </label>
+                                <input
+                                    type="number"
+                                    step="0.1"
+                                    min="1.5"
+                                    max="10"
+                                    required
+                                    placeholder="Ej: 2.5"
+                                    value={height}
+                                    onChange={(e) => setHeight(e.target.value ? Number(e.target.value) : '')}
                                     className="w-full p-2 border border-gray-200 rounded-lg text-xs outline-none focus:border-brand-blue"
                                 />
                             </div>
