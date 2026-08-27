@@ -52,7 +52,20 @@ export default function QuoteCalculator() {
 
         if (service === 'paredes') {
             const h = Number(height) || 2.5;
-            const wallArea = 2 * (w + l) * h;
+            const w = Number(width) || 0;
+            const l = Number(length) || 0;
+
+            let wallArea = 0;
+
+            if (location === 'exterior') {
+                // En exterior (fachada/muro) calculamos la superficie plana frontal: (Ancho + Largo) * Altura
+                // Si solo ingresa Ancho, calcula Ancho * Altura normalmente
+                wallArea = (w + l) * h;
+            } else {
+                // En interior calculamos el perímetro completo del ambiente (4 paredes)
+                wallArea = 2 * (w + l) * h;
+            }
+
             const rate = location === 'exterior' ? prices.exterior : prices.interior;
             total = wallArea * rate;
         } else if (service === 'cielorrasos') {
@@ -178,10 +191,11 @@ export default function QuoteCalculator() {
                         </div>
 
                         {/* Medidas: Ancho, Largo y Altura */}
+                        {/* Medidas de Paredes */}
                         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                             <div>
                                 <label className="block text-xs font-medium text-gray-600 mb-1">
-                                    Ancho (m)
+                                    {location === 'exterior' ? 'Frente / Ancho (m)' : 'Ancho del ambiente (m)'}
                                 </label>
                                 <input
                                     type="number"
@@ -194,24 +208,26 @@ export default function QuoteCalculator() {
                                     className="w-full p-2 border border-gray-200 rounded-lg text-xs outline-none focus:border-brand-blue"
                                 />
                             </div>
+
+                            {/* En interior se pide Largo para cerrar el perímetro de 4 paredes. En exterior es opcional si hay una pared lateral/L-shape */}
                             <div>
                                 <label className="block text-xs font-medium text-gray-600 mb-1">
-                                    Largo (m)
+                                    {location === 'exterior' ? 'Largo lateral (m) - opcional' : 'Largo del ambiente (m)'}
                                 </label>
                                 <input
                                     type="number"
                                     step="0.1"
-                                    min="0.5"
-                                    required
-                                    placeholder="Ej: 3.5"
+                                    min="0"
+                                    placeholder={location === 'exterior' ? 'Ej: 0.0' : 'Ej: 3.5'}
                                     value={length}
                                     onChange={(e) => setLength(e.target.value ? Number(e.target.value) : '')}
                                     className="w-full p-2 border border-gray-200 rounded-lg text-xs outline-none focus:border-brand-blue"
                                 />
                             </div>
+
                             <div>
                                 <label className="block text-xs font-medium text-gray-600 mb-1">
-                                    Altura techo (m)
+                                    Altura (m)
                                 </label>
                                 <input
                                     type="number"
