@@ -10,6 +10,7 @@ import {
     saveGalleryItems,
 } from '@/app/components/gallery/storage';
 import { GalleryItem } from '@/app/components/gallery/types';
+import PriceSettingsForm from '@/app/components/PriceSettingsForm';
 
 const AdminDashboard = () => {
     const router = useRouter();
@@ -96,12 +97,13 @@ const AdminDashboard = () => {
                 </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-                    {/* Formulario toma 5 columnas de 12 */}
-                    <div className="lg:col-span-5">
+                    {/* Formulario toma 5 columnas de 12. Columna izquierda*/}
+                    <div className="lg:col-span-5 space-y-6">
                         <GalleryForm onSubmit={handleAdd} />
+                        <PriceSettingsForm />
                     </div>
 
-                    {/* Lista toma 7 columnas de 12 */}
+                    {/* Lista toma 7 columnas de 12. columna Derecha*/}
                     <div className="lg:col-span-7">
                         <GalleryList
                             items={items}

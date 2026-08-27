@@ -1,6 +1,7 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { DEFAULT_PRICES, CotizadorPrices } from './PriceSettingsForm';
 
 type ServiceType = 'paredes' | 'cielorrasos' | 'puertas' | 'ventanas';
 type RoomType = 'living' | 'habitacion' | 'banio' | 'cocina' | 'fachada' | 'patio';
@@ -15,6 +16,9 @@ const PRICE_PER_M2_CEILING = 9500;
 const PRICE_PER_DOOR = 25000;
 const PRICE_PER_WINDOW = 20000;
 
+
+
+
 export default function QuoteCalculator() {
     const [service, setService] = useState<ServiceType>('paredes');
     const [location, setLocation] = useState<WallLocation>('interior');
@@ -23,6 +27,19 @@ export default function QuoteCalculator() {
     const [length, setLength] = useState<number | ''>('');
     const [quantity, setQuantity] = useState<number | ''>(1);
     const [estimatedTotal, setEstimatedTotal] = useState<number | null>(null);
+
+    const [prices, setPrices] = useState<CotizadorPrices>(DEFAULT_PRICES);
+
+    useEffect(() => {
+    const stored = localStorage.getItem('cotizador_precios');
+    if (stored) {
+        try {
+            setPrices(JSON.parse(stored));
+        } catch (e) {
+            console.error('Error cargando precios en cotizador', e);
+        }
+    }
+}, []);
 
     const calculateEstimate = (e: React.FormEvent) => {
         e.preventDefault();
@@ -33,14 +50,14 @@ export default function QuoteCalculator() {
 
         if (service === 'paredes') {
             const wallArea = 2 * (w + l) * 2.5;
-            const rate = location === 'exterior' ? PRICE_PER_M2_EXTERIOR : PRICE_PER_M2_INTERIOR;
+            const rate = location === 'exterior' ? prices.exterior : prices.interior;
             total = wallArea * rate;
         } else if (service === 'cielorrasos') {
-            total = (w * l) * PRICE_PER_M2_CEILING;
+            total = (w * l) * prices.ceiling;
         } else if (service === 'puertas') {
-            total = qty * PRICE_PER_DOOR;
+            total = qty * prices.door;
         } else if (service === 'ventanas') {
-            total = qty * PRICE_PER_WINDOW;
+            total = qty * prices.window;
         }
 
         setEstimatedTotal(Math.round(total));
@@ -59,6 +76,7 @@ export default function QuoteCalculator() {
         const message = `Hola Tu Pintor CBA! Usé el cotizador web para: ${detail}. Presupuesto estimado: $${estimatedTotal?.toLocaleString('es-AR')} ARS. ¿Quisiera coordinar una visita técnica?`;
         return `https://wa.me/${PHONE_NUMBER}?text=${encodeURIComponent(message)}`;
     };
+
 
     return (
         <div className="w-full p-6 bg-white rounded-2xl border border-gray-200/80 shadow-xs">
