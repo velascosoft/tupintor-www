@@ -1,93 +1,62 @@
-# TuPintor WWW
+# TuPintor - Servicios Profesionales de Pintura en Córdoba
 
-Sitio web de TuPintor construido con Next.js (App Router) y React.
+Bienvenido al repositorio oficial de **TuPintor**, una plataforma web diseñada para ofrecer servicios profesionales de pintura en la ciudad de Córdoba, Argentina. El sitio está enfocado en proporcionar una experiencia de usuario moderna, rápida y accesible, permitiendo a los clientes visualizar trabajos realizados y solicitar presupuestos de manera directa.
 
-## Stack
+## 🚀 Características Principales
 
-- **Runtime:** Node.js `v22.21.0` (`.nvmrc`)
-- **Framework:** Next.js `15.5.9` (App Router, `src/app`)
-- **Lenguaje:** TypeScript + React `19`
-- **Estilos:** Tailwind CSS `4` + CSS global (`src/app/globals.css`)
-- **Estado de datos cliente:** TanStack React Query
-- **Testing:** Jest (`jest.config.ts`, entorno `jsdom`)
-- **Linting:** ESLint flat config (`eslint.config.js`)
-- **Deploy:** Vercel (`vercel.json`) y build standalone para contenedor (`next.config.ts`)
+- **Landing Page de Alto Impacto:** Secciones detalladas sobre servicios (Interior/Exterior, Airless, Pisos, etc.), testimonios y proceso de trabajo.
+- **Galería de Trabajos Realizados:** Un portafolio completo con filtrado por categorías (Interior, Exterior, Fachadas, etc.) y visualización en Lightbox.
+- **Panel Administrativo:** Interfaz protegida para que el administrador pueda subir fotos, eliminar trabajos y gestionar los destacados de la portada.
+- **Integración con WhatsApp:** Acceso directo para consultas rápidas y envío de fotos para presupuestos.
+- **Responsive Design:** Optimizado para dispositivos móviles, tablets y escritorio.
+- **SEO Ready:** Configurado para visibilidad en motores de búsqueda.
 
-## Entry points
+## 🛠️ Stack Tecnológico
 
-- `src/app/layout.tsx`: layout raíz global (fuentes, navbar, footer, QueryContainer)
-- `src/app/page.tsx`: página principal `/`
+- **Frontend:** [Next.js 15](https://nextjs.org/) (App Router) + [React 19](https://react.dev/)
+- **Estilos:** [Tailwind CSS 4](https://tailwindcss.com/)
+- **Lenguaje:** [TypeScript](https://www.typescriptlang.org/)
+- **Gestión de Estado:** [Zustand](https://zustand-demo.pmnd.rs/) y [React Query](https://tanstack.com/query/latest)
+- **Persistencia:** `localStorage` (para gestión dinámica de la galería en el cliente)
+- **Iconos:** Font Awesome 6 y Lucide React
 
-Actualmente no hay rutas API (`src/app/**/route.*`) en el repositorio.
+## 📦 Instalación y Configuración Local
 
-## Entornos
+Sigue estos pasos para ejecutar el proyecto en tu máquina local:
 
-| Entorno | Uso | Comando |
-|---|---|---|
-| Local desarrollo | Ejecutar app con recarga | `pnpm dev` |
-| Local producción | Build y ejecución local | `pnpm build` + `pnpm start` |
-| Vercel | Deploy de Next.js | detección automática por `framework: nextjs` |
-| Contenedor/PM2 | Ejecutar build standalone | `pm2-runtime` con `ecosystem.config.cjs` |
+1. **Clonar el repositorio:**
+   ```bash
+   git clone https://github.com/tu-usuario/tupintor-www.git
+   cd tupintor-www
+   ```
 
-No se detectaron variables de entorno consumidas en `src/` (`process.env` / `NEXT_PUBLIC_*`).
+2. **Instalar dependencias:**
+   Este proyecto utiliza `pnpm`. Si no lo tienes instalado, puedes obtenerlo con `npm install -g pnpm`.
+   ```bash
+   pnpm install
+   ```
 
-## Setup local
+3. **Ejecutar el entorno de desarrollo:**
+   ```bash
+   pnpm dev
+   ```
+   Abre [http://localhost:3000](http://localhost:3000) en tu navegador para ver el resultado.
 
-1. Instalar Node.js `v22.21.0`.
-2. Instalar dependencias: `pnpm install`
-3. Levantar desarrollo: `pnpm dev`
-4. Abrir `http://localhost:3000`
+## 🔑 Acceso Administrativo
 
-## Scripts disponibles
+Para acceder al panel de gestión de la galería:
+1. Ve a la ruta `/login`.
+2. Ingresa la contraseña de administrador (por defecto configurada en el código para propósitos de demostración/MVP).
+3. Gestiona los trabajos que aparecen en la sección de "Galería" y en la página completa de portafolio.
 
-| Script | Descripción |
-|---|---|
-| `pnpm dev` | Inicia Next.js en modo desarrollo (Turbopack) |
-| `pnpm build` | Genera build de producción |
-| `pnpm start` | Sirve build de producción |
-| `pnpm lint` | Ejecuta lint |
-| `pnpm test` | Ejecuta tests con Jest |
-| `pnpm nuke:dependencies` | Ejecuta `npkill` para limpieza de dependencias |
+## 📄 Scripts Disponibles
 
-## Estructura del proyecto
+- `pnpm dev`: Inicia el servidor de desarrollo.
+- `pnpm build`: Crea la aplicación para producción.
+- `pnpm start`: Inicia el servidor de producción.
+- `pnpm lint`: Ejecuta el linter para asegurar la calidad del código.
+- `pnpm test`: Ejecuta los tests unitarios y de integración.
 
-```text
-tupintor-www/
-├─ public/
-│  └─ images/
-├─ src/
-│  ├─ app/
-│  │  ├─ components/
-│  │  │  ├─ common/
-│  │  │  └─ *.tsx
-│  │  ├─ globals.css
-│  │  ├─ layout.tsx
-│  │  └─ page.tsx
-│  ├─ backend/   (estructura creada, sin archivos)
-│  ├─ lib/       (vacío)
-│  └─ tests/     (vacío)
-├─ next.config.ts
-├─ vercel.json
-├─ jest.config.ts
-├─ eslint.config.js
-└─ Dockerfile
-```
+---
 
-## Grafo de componentes (home)
-
-```mermaid
-graph TD
-  A[src/app/layout.tsx] --> B[Navbar]
-  A --> C[page.tsx]
-  A --> D[WhatsappButton]
-  A --> E[Footer]
-  C --> F[Hero]
-  C --> G[Services]
-  C --> H[Gallery]
-  C --> I[WhyUs]
-  C --> J[PricingInfo]
-  C --> K[QuoteProcess]
-  C --> L[LocationMap]
-  C --> M[MoreWorks]
-```
-
+Desarrollado por **Velasco Software**.

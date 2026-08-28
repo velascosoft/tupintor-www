@@ -9,7 +9,7 @@ const AdminDashboard = () => {
     const router = useRouter();
 
     const [isAuth, setIsAuth] = useState(false);
-    
+
     useEffect(() => {
         if (!localStorage.getItem('isAdminLogged')) {
             router.push('/login');
@@ -51,11 +51,18 @@ const AdminDashboard = () => {
                     </button>
                 </div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
-                    <GalleryForm />
-                    <GalleryList
-                        onToggleFeatured={handleToggleFeatured}
-                    />
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                    {/* Formulario toma 5 columnas de 12 */}
+                    <div className="lg:col-span-5">
+                        <GalleryForm />
+                    </div>
+
+                    {/* Lista toma 7 columnas de 12 */}
+                    <div className="lg:col-span-7">
+                        <GalleryList
+                            onToggleFeatured={handleToggleFeatured}
+                        />
+                    </div>
                 </div>
             </div>
         </div>
