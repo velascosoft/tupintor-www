@@ -4,19 +4,24 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import GalleryGrid from '@/app/components/gallery/GalleryGrid';
 import ImageLightbox from '@/app/components/gallery/ImageLightbox';
-import { readGalleryItems } from '@/app/components/gallery/storage';
-import { GalleryItem } from '@/app/components/gallery/types';
+import { useListGalleryImages } from '../hooks/useGallery';
 
 const Gallery = () => {
     const [selectedImage, setSelectedImage] = useState<string | null>(null);
-    const [trabajos, setTrabajos] = useState<GalleryItem[]>([]);
+    const [items, setItems] = useState<Array<{
+        id: string;
+        url: string;
+        title: string;
+        category: string;
+    }>>([]);
+
+    const { data } = useListGalleryImages();
 
     useEffect(() => {
-        setTrabajos(readGalleryItems());
-    }, []);
+        setItems(data || []);
+    }, [data]);
 
-    // 1. Filtramos sólo las fotos marcadas como 'isFeatured' (máximo 4)
-    const featuredTrabajos = trabajos.filter(t => t.isFeatured).slice(0, 4);
+    const featuredTrabajos = items.filter(t => true).slice(0, 4);
 
     return (
         <section id="trabajos" className="py-20 bg-white px-4 border-t border-gray-100">

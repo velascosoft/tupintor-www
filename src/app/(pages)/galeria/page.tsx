@@ -4,26 +4,30 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import GalleryGrid from '@/app/components/gallery/GalleryGrid';
 import ImageLightbox from '@/app/components/gallery/ImageLightbox';
-import { readGalleryItems } from '@/app/components/gallery/storage';
 import {
     GALLERY_CATEGORIES,
     GalleryCategory,
-    GalleryItem,
 } from '@/app/components/gallery/types';
+import { useListGalleryImages } from '@/app/hooks/useGallery';
+import { capitalize } from '@/app/utils/stringUtils';
 
 const GalleryPage = () => {
     const [filter, setFilter] = useState<GalleryCategory>('Todos');
     const [selectedImage, setSelectedImage] = useState<string | null>(null);
-    const [items, setItems] = useState<GalleryItem[]>([]);
+    const [items, setItems] = useState<Array<{
+        id: string;
+        url: string;
+        title: string;
+        category: string;
+    }>>([]);
+
+    const { data } = useListGalleryImages();
 
     useEffect(() => {
-        setItems(readGalleryItems());
-    }, []);
+        setItems(data || []);
+    }, [data]);
 
-    const filteredItems =
-        filter === 'Todos'
-            ? items
-            : items.filter((item) => item.category === filter);
+    const filteredItems = filter === 'Todos' ? items : items.filter((item) => capitalize(item.category) === filter);
 
     return (
         <main className="min-h-screen bg-slate-50 pt-28 pb-16 px-4">
@@ -56,11 +60,10 @@ const GalleryPage = () => {
                             type="button"
                             key={category}
                             onClick={() => setFilter(category)}
-                            className={`px-4 py-1.5 rounded-full font-semibold text-xs sm:text-sm transition-all cursor-pointer ${
-                                filter === category
+                            className={`px-4 py-1.5 rounded-full font-semibold text-xs sm:text-sm transition-all cursor-pointer ${filter === category
                                     ? 'bg-blue-600 text-white shadow-xs'
                                     : 'bg-white text-gray-600 hover:bg-gray-100 border border-gray-200'
-                            }`}
+                                }`}
                         >
                             {category}
                         </button>

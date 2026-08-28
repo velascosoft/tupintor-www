@@ -1,9 +1,12 @@
 'use client';
 
-import { GalleryItem } from './types';
-
 interface GalleryGridProps {
-    items: GalleryItem[];
+    items: Array<{
+        id: string;
+        url: string;
+        title: string;
+        category: string;
+    }>;
     onSelect: (imageUrl: string) => void;
     compact?: boolean;
 }
@@ -20,13 +23,13 @@ const GalleryGrid = ({ items, onSelect, compact = false }: GalleryGridProps) => 
             <button
                 type="button"
                 key={item.id}
-                onClick={() => onSelect(item.imageUrl)}
+                onClick={() => onSelect(item.url)}
                 className={`group relative overflow-hidden rounded-2xl shadow-xs hover:shadow-lg transition-all duration-300 cursor-pointer h-56 md:h-64 bg-gray-100 border border-gray-200/60 text-left ${
                     compact ? 'h-72 border-gray-100' : ''
                 }`}
             >
                 <img
-                    src={item.imageUrl}
+                    src={item.url}
                     alt={item.title}
                     className={`w-full h-full object-cover transition-transform duration-500 ${
                         compact ? 'group-hover:scale-110' : 'group-hover:scale-105'

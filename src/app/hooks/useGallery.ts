@@ -8,7 +8,7 @@ export const useListGalleryImages = () => {
         queryFn: async () => {
             return listImages();
         },
-        staleTime: Duration.fromObject({ hours: 3 }).toMillis(),
+        staleTime: Duration.fromObject({ minutes: 5 }).toMillis(),
         retry: 1,
     });
 }

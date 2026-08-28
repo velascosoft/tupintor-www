@@ -41,6 +41,12 @@ importers:
       '@vercel/blob':
         specifier: 2.8.0
         version: 2.8.0
+      '@vercel/global-config':
+        specifier: ^1.5.1
+        version: 1.5.1(next@15.5.9(@babel/core@7.29.7)(react-dom@19.1.4(react@19.1.4))(react@19.1.4))
+      '@vercel/sdk':
+        specifier: 1.28.22
+        version: 1.28.22
       axios:
         specifier: 1.12.2
         version: 1.12.2
@@ -116,6 +122,9 @@ importers:
       uuid:
         specifier: 11.1.0
         version: 11.1.0
+      uuidv7:
+        specifier: 1.2.1
+        version: 1.2.1
       zod:
         specifier: 3.25.58
         version: 3.25.58
@@ -1437,9 +1446,27 @@ packages:
     resolution: {integrity: sha512-g9XerViJ/paZujufXYcu5XYI2vU2rtB4sgdpjUHde5RnOkdmpu0ngH46LCFGHoPXO/C+qDPSczIHIRN+8Q2YKQ==}
     engines: {node: '>= 18'}
 
+  '@vercel/global-config-fs@0.1.0':
+    resolution: {integrity: sha512-xxMUwf96H/qKTA4Az+uh3xlVWkwnN3z400P5gex0uUsU8pe99njopYVyKVoUTfu8gN9xbHqaigWaIBr1+lufMg==}
+
+  '@vercel/global-config@1.5.1':
+    resolution: {integrity: sha512-PUJaoyMGuSLdKnBgYIqeH1i6U3G+5noLvvJLqI8IPP5+P0b2Q5EcBBraFRh6ctNY/yTpb40klyLYyE3X0OPmKQ==}
+    engines: {node: '>=14.6'}
+    peerDependencies:
+      '@opentelemetry/api': ^1.7.0
+      next: '>=1'
+    peerDependenciesMeta:
+      '@opentelemetry/api':
+        optional: true
+      next:
+        optional: true
+
   '@vercel/oidc@3.8.4':
     resolution: {integrity: sha512-FGNvVZ5pgX9FaBqkPt6VkYFZ6bWAMDzYi7nxW+1Xt+Z4fn5PuTULVwsxjKc+0uKhysyWBQmvsmM50Oh6C2/oMA==}
     engines: {node: '>= 20'}
+
+  '@vercel/sdk@1.28.22':
+    resolution: {integrity: sha512-HwXBBQ5jc6078NaEANjdJC7Pbeht3PHj4q+Di1A0gpUouirY1YYExPnQmC1luq2TsQ6ZPBD5YfyPxmlIZUQaBw==}
 
   acorn-jsx@5.3.2:
     resolution: {integrity: sha512-rq9s+JNhf0IChjtDXxllJ7g41oZk5SlXtp0LHwyA5cejwn7vKmKp4pPri6YEePv2PU65sAsegbXtIinmDFDXgQ==}
@@ -3170,6 +3197,10 @@ packages:
     resolution: {integrity: sha512-0/A9rDy9P7cJ+8w1c9WD9V//9Wj15Ce2MPz8Ri6032usz+NfePxx5AcN3bN+r6ZL6jEo066/yNYB3tn4pQEx+A==}
     hasBin: true
 
+  uuidv7@1.2.1:
+    resolution: {integrity: sha512-4kPkK3/XTQW9Hbm4CaqfICn+kY9LJtDVEOfgsRRra/+n2Ofg4NqzRFceAkxvQ/Ud/6BpHOPzj8cirqM7TzTN5Q==}
+    hasBin: true
+
   v8-compile-cache-lib@3.0.1:
     resolution: {integrity: sha512-wa7YjyUGfNZngI/vtK0UHAN+lgDCxBPCylVXGp0zu59Fz5aiGtNXaq3DhIov063MorB+VfufLh3JlF2KdTK3xg==}
 
@@ -4529,11 +4560,23 @@ snapshots:
     dependencies:
       execa: 5.1.1
 
+  '@vercel/global-config-fs@0.1.0': {}
+
+  '@vercel/global-config@1.5.1(next@15.5.9(@babel/core@7.29.7)(react-dom@19.1.4(react@19.1.4))(react@19.1.4))':
+    dependencies:
+      '@vercel/global-config-fs': 0.1.0
+    optionalDependencies:
+      next: 15.5.9(@babel/core@7.29.7)(react-dom@19.1.4(react@19.1.4))(react@19.1.4)
+
   '@vercel/oidc@3.8.4':
     dependencies:
       '@vercel/cli-config': 0.2.3
       '@vercel/cli-exec': 1.0.1
       jose: 5.10.0
+
+  '@vercel/sdk@1.28.22':
+    dependencies:
+      zod: 3.25.58
 
   acorn-jsx@5.3.2(acorn@8.18.0):
     dependencies:
@@ -6385,6 +6428,8 @@ snapshots:
   uuid@10.0.0: {}
 
   uuid@11.1.0: {}
+
+  uuidv7@1.2.1: {}
 
   v8-compile-cache-lib@3.0.1: {}
 

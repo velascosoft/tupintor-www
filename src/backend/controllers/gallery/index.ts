@@ -1,16 +1,16 @@
-import { ApiRouteController, RequestMapping, UseController } from "@velascosoftware/next-api-router";
+import { ApiRouteController, RequestMapping, Use } from "@velascosoftware/next-api-router";
 import { NextRequest, NextResponse } from "next/server";
 import { BlobAccessType, ListBlobResult, ListBlobResultBlob, type PutBlobResult, list, put, del } from '@vercel/blob';
 import { StatusCodes } from "http-status-codes";
 import { logger } from "@/backend/lib/logger";
 import { BLOB_READ_WRITE_TOKEN } from "@/backend/config";
 import { ListImagesResponse } from "./response";
+import { requireAuthentication } from "@/backend/middlewares";
 
 const log = logger.child({ module: "gallery-controller " });
 
 const allowedTypes = ['image/jpeg', 'image/png', 'image/webp'];
 
-@UseController()
 export class GalleryController implements ApiRouteController {
 
     @RequestMapping("/", "GET")
@@ -51,6 +51,7 @@ export class GalleryController implements ApiRouteController {
     }
 
     @RequestMapping("/upload", "POST")
+    @Use(requireAuthentication())
     async uploadImage(req: NextRequest): Promise<NextResponse<ApiResponse<PutBlobResult>>> {
         try {
 
@@ -125,6 +126,7 @@ export class GalleryController implements ApiRouteController {
     }
 
     @RequestMapping("/delete", "DELETE")
+    @Use(requireAuthentication())
     async deleteImage(req: NextRequest): Promise<NextResponse<ApiResponse>> {
         try {
 

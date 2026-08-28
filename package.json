@@ -26,6 +26,8 @@
     "@upstash/ratelimit": "2.0.6",
     "@velascosoftware/next-api-router": "1.2.2",
     "@vercel/blob": "2.8.0",
+    "@vercel/global-config": "^1.5.1",
+    "@vercel/sdk": "1.28.22",
     "axios": "1.12.2",
     "axios-oauth-1.0a": "0.4.0",
     "clsx": "2.1.1",
@@ -51,6 +53,7 @@
     "server-only": "0.0.1",
     "ts-debounce": "4.0.0",
     "uuid": "11.1.0",
+    "uuidv7": "1.2.1",
     "zod": "3.25.58",
     "zustand": "5.0.7"
   },

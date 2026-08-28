@@ -2,6 +2,18 @@
 
 Todos los cambios importantes de este proyecto se documentan en este archivo.
 
+## [1.0.0] - 2026-08-28
+
+### Agregado
+
+- Autenticación de administradores con sesiones protegidas.
+- Actualización de contraseña desde el panel de administración.
+- Notificaciones toast y controles para mostrar u ocultar contraseñas.
+
+### Cambiado
+
+- Gestión de galería migrada a endpoints del backend y almacenamiento persistente en Vercel Blob.
+
 ## [0.2.0] - 2026-08-28
 
 ### Agregado
