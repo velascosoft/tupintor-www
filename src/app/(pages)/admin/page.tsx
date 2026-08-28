@@ -4,18 +4,12 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import GalleryForm from '@/app/components/admin/GalleryForm';
 import GalleryList from '@/app/components/admin/GalleryList';
-import {
-    DEFAULT_GALLERY_ITEMS,
-    readGalleryItems,
-    saveGalleryItems,
-} from '@/app/components/gallery/storage';
-import { GalleryItem } from '@/app/components/gallery/types';
 
 const AdminDashboard = () => {
     const router = useRouter();
-    const [isAuth, setIsAuth] = useState(false);
-    const [items, setItems] = useState<GalleryItem[]>([]);
 
+    const [isAuth, setIsAuth] = useState(false);
+    
     useEffect(() => {
         if (!localStorage.getItem('isAdminLogged')) {
             router.push('/login');
@@ -23,53 +17,15 @@ const AdminDashboard = () => {
         }
 
         setIsAuth(true);
-        setItems(readGalleryItems(DEFAULT_GALLERY_ITEMS));
     }, [router]);
-
-    useEffect(() => {
-        if (isAuth) {
-            saveGalleryItems(items);
-        }
-    }, [items, isAuth]);
 
     const handleLogout = () => {
         localStorage.removeItem('isAdminLogged');
         router.push('/login');
     };
 
-    const handleAdd = (item: Omit<GalleryItem, 'id'>) => {
-        setItems((currentItems) => [
-            { ...item, id: Date.now().toString() },
-            ...currentItems,
-        ]);
-        alert('¡Imagen agregada correctamente a la galería!');
-    };
-
-    const handleDelete = (id: string) => {
-        if (confirm('¿Estás seguro de eliminar esta imagen?')) {
-            setItems((currentItems) => currentItems.filter((item) => item.id !== id));
-        }
-    };
-
     const handleToggleFeatured = (id: string) => {
-        setItems((currentItems) =>
-            currentItems.map((item) => {
-                if (item.id !== id) {
-                    return item;
-                }
 
-                const featuredCount = currentItems.filter(
-                    (currentItem) => currentItem.isFeatured && currentItem.id !== id,
-                ).length;
-
-                if (!item.isFeatured && featuredCount >= 4) {
-                    alert('Atención: Solo podés seleccionar hasta 4 fotos para la portada.');
-                    return item;
-                }
-
-                return { ...item, isFeatured: !item.isFeatured };
-            }),
-        );
     };
 
     if (!isAuth) {
@@ -96,10 +52,8 @@ const AdminDashboard = () => {
                 </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
-                    <GalleryForm onSubmit={handleAdd} />
+                    <GalleryForm />
                     <GalleryList
-                        items={items}
-                        onDelete={handleDelete}
                         onToggleFeatured={handleToggleFeatured}
                     />
                 </div>

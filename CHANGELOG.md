@@ -2,6 +2,13 @@
 
 Todos los cambios importantes de este proyecto se documentan en este archivo.
 
+## [0.2.0] - 2026-08-28
+
+### Agregado
+
+- Gestión de imágenes de galería mediante API y almacenamiento de Vercel Blob.
+- Carga, listado y eliminación de imágenes desde el panel de administración.
+
 ## [0.1.0] - 2026-08-12
 
 ### Agregado

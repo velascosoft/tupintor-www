@@ -15,7 +15,6 @@
     "test": "cross-env CI=true NODE_ENV=test jest --config jest.config.ts"
   },
   "dependencies": {
-    "@velascosoftware/next-api-router": "1.2.2",
     "@headlessui/react": "2.2.3",
     "@heroicons/react": "2.2.0",
     "@mui/icons-material": "7.1.0",
@@ -25,6 +24,8 @@
     "@tanstack/react-query": "5.80.5",
     "@tanstack/react-query-devtools": "5.80.5",
     "@upstash/ratelimit": "2.0.6",
+    "@velascosoftware/next-api-router": "1.2.2",
+    "@vercel/blob": "2.8.0",
     "axios": "1.12.2",
     "axios-oauth-1.0a": "0.4.0",
     "clsx": "2.1.1",
@@ -55,12 +56,6 @@
   },
   "devDependencies": {
     "@eslint/js": "10.0.1",
-    "autoprefixer": "10.5.4",
-    "eslint": "10.6.0",
-    "eslint-plugin-react-hooks": "7.1.1",
-    "eslint-plugin-react-refresh": "0.5.3",
-    "globals": "17.7.0",
-    "postcss": "8.5.23",
     "@tailwindcss/postcss": "4.1.5",
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.9.1",
@@ -73,12 +68,18 @@
     "@types/pino": "7.0.4",
     "@types/react": "19.1.2",
     "@types/react-dom": "19.1.3",
+    "autoprefixer": "10.5.4",
+    "cross-env": "10.1.0",
     "dotenv-cli": "10.0.0",
+    "eslint": "10.6.0",
+    "eslint-plugin-react-hooks": "7.1.1",
+    "eslint-plugin-react-refresh": "0.5.3",
+    "globals": "17.7.0",
     "jest": "^30.2.0",
     "jest-environment-jsdom": "^30.2.0",
+    "postcss": "8.5.23",
     "tailwindcss": "4.1.5",
     "ts-node": "^10.9.2",
-    "typescript": "5.8.3",
-    "cross-env": "10.1.0"
+    "typescript": "5.8.3"
   }
 }

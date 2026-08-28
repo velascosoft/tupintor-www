@@ -1,21 +1,20 @@
 'use client';
 
-import { ChangeEvent, FormEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, useState, useRef } from 'react';
+import { type PutBlobResult } from "@vercel/blob";
+import { uploadImage } from '@/app/services/gallery';
+import { useListGalleryImages } from '@/app/hooks/useGallery';
 
-interface GalleryFormProps {
-    onSubmit: (item: {
-        title: string;
-        category: string;
-        imageUrl: string;
-        isFeatured: boolean;
-    }) => void;
-}
+const GalleryForm = () => {
 
-const GalleryForm = ({ onSubmit }: GalleryFormProps) => {
-    const [title, setTitle] = useState('');
-    const [category, setCategory] = useState('Interior');
-    const [isFeatured, setIsFeatured] = useState(false);
+    const inputImageRef = useRef<HTMLInputElement>(null);
+    const { refetch } = useListGalleryImages();
+
+    const [title, setTitle] = useState<string>('');
+    const [category, setCategory] = useState<"Exterior" | "Interior" | "Pisos" | "Fachada" | "Airless">('Interior');
+    const [isFeatured, setIsFeatured] = useState<boolean>(false);
     const [imagePreview, setImagePreview] = useState<string | null>(null);
+    const [blob, setBlob] = useState<PutBlobResult | null>(null);
 
     const handleImageChange = (event: ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files?.[0];
@@ -29,19 +28,27 @@ const GalleryForm = ({ onSubmit }: GalleryFormProps) => {
         reader.readAsDataURL(file);
     };
 
-    const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
-        if (!title || !imagePreview) {
-            alert('Por favor completá el título y selecciona una imagen.');
-            return;
+        if (!inputImageRef.current?.files) {
+            throw new Error('No file selected');
         }
 
-        onSubmit({ title, category, imageUrl: imagePreview, isFeatured });
+        const file = inputImageRef.current.files[0];
+
+        const newBlob = await uploadImage(title, category, isFeatured, file);
+        
+        setBlob(newBlob);
+
         setTitle('');
         setCategory('Interior');
         setIsFeatured(false);
         setImagePreview(null);
+
+        inputImageRef.current.value = '';
+
+        await refetch();
     };
 
     return (
@@ -68,7 +75,7 @@ const GalleryForm = ({ onSubmit }: GalleryFormProps) => {
                     </label>
                     <select
                         value={category}
-                        onChange={(event) => setCategory(event.target.value)}
+                        onChange={(event) => setCategory(event.target.value as any)}
                         className="w-full p-2.5 border border-gray-300 rounded-lg text-slate-900 text-sm focus:ring-2 focus:ring-slate-900 focus:outline-hidden"
                     >
                         <option value="Interior">Interior</option>
@@ -95,10 +102,13 @@ const GalleryForm = ({ onSubmit }: GalleryFormProps) => {
                         Seleccionar Imagen
                     </label>
                     <input
+                        name="file"
                         type="file"
+                        ref={inputImageRef}
                         accept="image/*"
                         onChange={handleImageChange}
                         className="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-slate-900 file:text-white hover:file:bg-slate-800 cursor-pointer"
+                        required
                     />
                 </div>
                 {imagePreview && (
